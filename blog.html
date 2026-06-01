@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog · Luana Saraiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">~/luana.saraiva</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Portfolio</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+  </ul>
+  <a class="nav-back" href="index.html">← Voltar ao portfolio</a>
+</nav>
+
+<!-- HEADER -->
+<header class="blog-header">
+  <div>
+    <p class="blog-eyebrow">Escrita técnica</p>
+    <h1 class="blog-title">Blog & Artigos</h1>
+    <p class="blog-subtitle">
+      Anotações sobre Ruby on Rails, testes, performance
+      e tudo que aprendo no caminho.
+    </p>
+  </div>
+  <div class="blog-count">
+    artigos publicados
+    <span id="article-count">5</span>
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">filtrar:</span>
+  <button class="filter-btn active" data-tag="todos">todos</button>
+  <button class="filter-btn" data-tag="rails">rails</button>
+  <button class="filter-btn" data-tag="ruby">ruby</button>
+  <button class="filter-btn" data-tag="database">database</button>
+  <button class="filter-btn" data-tag="testing">testing</button>
+  <button class="filter-btn" data-tag="devops">devops</button>
+  <button class="filter-btn" data-tag="career">carreira</button>
+</div>
+
+<!-- LAYOUT -->
+<div class="blog-layout">
+  <main class="articles-list">
+
+    <!-- FEATURED -->
+    <a href="posts/post_1.html" class="featured-article reveal" data-tags="database">
+      <div>
+        <span class="featured-badge">✦ destaque</span>
+        <h2 class="featured-title">Redis além do cache: 5 usos que a maioria dos devs ignora</h2>
+        <p class="featured-excerpt">
+          A maioria das pessoas usa Redis como cache e para por aí. Mas Redis é um banco de dados
+          em memória extremamente versátil. Subutilizá-lo é deixar performance e simplicidade na mesa.
+        </p>
+        <div class="article-meta">
+          <span>31 Mai 2026</span>
+          <span class="dot">·</span>
+          <span>5 min de leitura</span>
+          <span class="dot">·</span>
+          <span>Database</span>
+        </div>
+        <div class="read-more">Ler artigo →</div>
+      </div>
+      <div class="featured-cover">🗄️</div>
+    </a>
+
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-section">
+      <p class="sidebar-title">tópicos</p>
+      <div class="sidebar-tags">
+        <span class="sidebar-tag">rails</span>
+        <span class="sidebar-tag">ruby</span>
+        <span class="sidebar-tag">activerecord</span>
+        <span class="sidebar-tag">rspec</span>
+        <span class="sidebar-tag">postgresql</span>
+        <span class="sidebar-tag">sidekiq</span>
+        <span class="sidebar-tag">docker</span>
+        <span class="sidebar-tag">microsserviços</span>
+        <span class="sidebar-tag">api</span>
+        <span class="sidebar-tag">carreira</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-title">recentes</p>
+      <ul class="recent-list">
+        <li>
+          <a href="posts/post_1.html" class="recent-item">
+            <span class="recent-item-title">Redis além do cache: 5 usos que a maioria dos devs ignora</span>
+            <span class="recent-item-date">31 Mai 2026</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- newsletter (ativar quando estiver pronto)
+    <div class="sidebar-section">
+      <p class="sidebar-title">newsletter</p>
+      <div class="newsletter-box">
+        <p>Novos artigos direto no seu email. Sem spam, só conteúdo técnico.</p>
+        <input class="newsletter-input" type="email" placeholder="seu@email.com" />
+        <button class="newsletter-btn">Inscrever →</button>
+      </div>
+    </div>
+    -->
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">
+    Feito com <span class="hi">♥</span> + Ruby · © <span id="year"></span>
+  </span>
+  <span class="footer-copy">
+    <a href="index.html">← Luana Saraiva · Portfolio</a>
+  </span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.05 }
+  );
+  reveals.forEach(el => observer.observe(el));
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const articles   = document.querySelectorAll('.article-card, .featured-article');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      articles.forEach(article => {
+        const tags = article.dataset.tags || '';
+        article.style.display = (tag === 'todos' || tags.includes(tag)) ? '' : 'none';
+      });
+    });
+  });
+
+  document.getElementById('article-count').textContent = articles.length;
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redis além do cache: 5 usos que a maioria dos devs ignora · Luana Saraiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="../post.css" />
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">~/luana.saraiva</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Portfolio</a></li>
+    <li><a href="../blog.html" class="active">Blog</a></li>
+  </ul>
+  <a class="nav-back" href="../blog.html">← Voltar ao blog</a>
+</nav>
+
+<article class="post-container">
+
+  <header class="post-header">
+    <div class="post-meta-top">
+      <span class="card-tag tag-database">database</span>
+      <span class="post-read-time">5 min de leitura</span>
+    </div>
+    <h1 class="post-title">Redis além do cache: 5 usos que a maioria dos devs ignora</h1>
+    <p class="post-subtitle">
+      A maioria das pessoas usa Redis como cache e para por aí. Mas Redis é um banco de dados
+      em memória extremamente versátil. Subutilizá-lo é deixar performance e simplicidade na mesa.
+    </p>
+    <div class="post-meta">
+      <span>31 Mai 2026</span>
+      <span class="dot">·</span>
+      <span>Luana Saraiva</span>
+    </div>
+  </header>
+
+  <div class="post-divider"></div>
+
+  <div class="post-body">
+
+    <p>
+      Se você usa Redis no seu projeto, há uma boa chance de estar usando apenas uma fração do que
+      ele pode oferecer. Cache de queries, cache de fragmentos de view: válido, mas longe do limite.
+      Aqui estão cinco usos que vão além disso.
+    </p>
+
+    <h2>1. Distributed Lock</h2>
+
+    <p>
+      Quando múltiplos processos ou workers competem pelo mesmo recurso, você precisa garantir que
+      só um execute por vez. Sem isso, você acaba com race conditions silenciosas que aparecem só
+      em produção, nos piores momentos.
+    </p>
+
+    <p>
+      Redis resolve isso com <code>SETNX</code> (<em>SET if Not eXists</em>): você tenta setar uma
+      chave. Se ela já existe, outro processo está executando e você aguarda ou descarta. Simples,
+      eficiente e sem precisar de uma fila inteira pra isso.
+    </p>
+
+    <pre><code>lock_key = "job:importacao:lock"
+acquired = redis.set(lock_key, 1, nx: true, ex: 30)
+
+if acquired
+  # executa o job com segurança
+ensure
+  redis.del(lock_key)
+end</code></pre>
+
+    <h2>2. Rate Limiting</h2>
+
+    <p>
+      Quer limitar quantas requisições um usuário pode fazer por minuto? Com <code>INCR</code> +
+      <code>EXPIRE</code> você implementa um contador com TTL em poucas linhas, sem banco relacional,
+      sem overhead.
+    </p>
+
+    <pre><code>key = "rate_limit:#{user_id}:#{Time.now.to_i / 60}"
+count = redis.incr(key)
+redis.expire(key, 60) if count == 1
+
+raise TooManyRequestsError if count > 100</code></pre>
+
+    <p>
+      A expiração automática do Redis garante que o contador seja zerado sem nenhuma tarefa de
+      limpeza no seu lado.
+    </p>
+
+    <h2>3. Filas leves com Pub/Sub</h2>
+
+    <p>
+      Para eventos simples onde você não precisa de persistência garantida, o Pub/Sub do Redis é
+      uma alternativa elegante a soluções mais pesadas como RabbitMQ ou Kafka.
+    </p>
+
+    <p>
+      Um serviço publica, outros assinam. Sem broker externo, sem configuração complexa. Ideal para
+      notificações internas, invalidação de cache distribuído ou comunicação entre serviços leves.
+    </p>
+
+    <pre><code># publisher
+redis.publish("pedidos:criados", pedido.to_json)
+
+# subscriber (em outro processo)
+redis.subscribe("pedidos:criados") do |on|
+  on.message { |_channel, msg| processar(msg) }
+end</code></pre>
+
+    <h2>4. Leaderboards em tempo real</h2>
+
+    <p>
+      Sorted Sets são uma das estruturas mais elegantes do Redis. Com <code>ZADD</code> e
+      <code>ZRANGE</code> você tem inserção, atualização e leitura ordenada, tudo com
+      complexidade O(log n).
+    </p>
+
+    <pre><code># adiciona ou atualiza pontuação
+redis.zadd("ranking:semanal", pontos, user_id)
+
+# top 10
+redis.zrevrange("ranking:semanal", 0, 9, with_scores: true)</code></pre>
+
+    <p>
+      Implementar isso num banco relacional exigiria índices cuidadosos e queries de ordenação
+      custosas. No Redis, é nativo.
+    </p>
+
+    <h2>5. Gerenciamento de sessões</h2>
+
+    <p>
+      Armazenar sessões de usuário no Redis é uma das práticas mais comuns em aplicações
+      distribuídas e faz todo sentido. TTL nativo significa que sessões expiram automaticamente.
+      Velocidade de leitura em memória significa autenticação sem latência.
+    </p>
+
+    <p>
+      Em Rails, basta configurar a session store:
+    </p>
+
+    <pre><code># config/initializers/session_store.rb
+Rails.application.config.session_store :redis_store,
+  servers: ENV["REDIS_URL"],
+  expire_after: 2.hours</code></pre>
+
+    <div class="post-divider"></div>
+
+    <h2>Conclusão</h2>
+
+    <p>
+      Redis não é só "o negócio que deixa a aplicação mais rápida". É uma ferramenta com estruturas
+      de dados ricas: strings, lists, sets, sorted sets, hashes, streams. Cada uma com casos de
+      uso específicos e bem definidos.
+    </p>
+
+    <p>
+      Vale a pena ler a documentação com atenção. Você vai descobrir que vários problemas que você
+      resolve com workarounds complicados já têm solução nativa no Redis.
+    </p>
+
+  </div>
+
+</article>
+
+<footer>
+  <span class="footer-copy">
+    Feito com <span class="hi">♥</span> + Ruby · © <span id="year"></span>
+  </span>
+  <span class="footer-copy">
+    <a href="../blog.html">← Voltar ao blog</a>
+  </span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

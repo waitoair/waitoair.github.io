@@ -1,50 +1,348 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <title>Hello World!</title>
-  </head>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luana Saraiva · Engenheira de Software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-  <body>
-    <div class="container">
-      <div class="card">
-        <h1>Hello, I'm Luana 🎉</h1>
-        <h2>Full Stack Developer</h2>
-    
-        <img src="images/IMG_1119.JPG" alt="my picture" />
-    
-        <p>
-          New at Programming 🖥️<br/>
-          People Person 🌍<br/>
-          Ruby on Rails 🎯<br/>
-          <strong>Le Wagon's student at Batch 616!</strong>
-        </p>
+<nav>
+  <a class="nav-logo" href="#">~/luana.saraiva</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experiência</a></li>
+    <li><a href="#contact">Contato</a></li>
+    <li><a href="blog.html" style="color: var(--ruby-light);">Blog ✦</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Fale comigo</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Engenheira de Software · Ruby on Rails</p>
+    <h1 class="hero-name">
+      Luana<br /><em>Saraiva</em>
+    </h1>
+    <p class="hero-subtitle">
+      Trabalho com Ruby on Rails há mais de 4 anos construindo APIs, sistemas distribuídos
+      e arquiteturas que precisam durar. Gosto de código bem testado, de entender o problema
+      antes de sair codando, e de deixar o sistema um pouco melhor do que encontrei.
+    </p>
+    <div class="hero-actions">
+      <a href="#experience" class="btn-primary">Ver experiência →</a>
+      <a href="#contact" class="btn-outline">Entre em contato</a>
+    </div>
+  </div>
+
+
+</section>
+
+<div class="divider"></div>
+
+<section id="about" class="reveal">
+  <div class="about-text">
+    <p class="section-tag">Sobre mim</p>
+    <h2 class="section-title">Quem sou, o que faço</h2>
+    <p>
+      Olá, me chamo <span>Luana</span>, engenheira de software morando no
+      <span>Rio de Janeiro</span> com foco em <span>Ruby on Rails</span>. Tenho experiência
+      construindo aplicações web escaláveis, APIs REST e arquiteturas de microsserviços,
+      atualmente na <span>Locaweb</span>.
+    </p>
+    <p>
+      Me importo muito com <span>qualidade de código e testes</span>. Acredito que uma boa
+      cobertura de testes é a base para evoluir um sistema com segurança. Gosto de identificar
+      gargalos e otimizar processos, seja no pipeline de CI ou na performance das queries.
+    </p>
+    <p>
+      Além de codar, gosto de escrever. Tenho um blog de tecnologia e posto regularmente
+      no LinkedIn. Acredito que explicar bem é tão importante quanto fazer bem.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills" class="reveal">
+  <div class="skills-header">
+    <p class="section-tag">Tecnologias</p>
+    <h2 class="section-title">Stack & ferramentas</h2>
+    <p class="section-desc">As principais tecnologias que uso no dia a dia para construir aplicações sólidas.</p>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">💎</div>
+        <span class="skill-card-name">Ruby & Rails</span>
       </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Ruby</span>
+        <span class="skill-tag">Ruby on Rails</span>
+        <span class="skill-tag">ActiveRecord</span>
+        <span class="skill-tag">Sidekiq</span>
+        <span class="skill-tag">Redis</span>
+      </div>
+    </div>
 
-      <div class="card">
-        <h2>Favorite TV Series</h2>
-        <ul class="list-inline">
-          <li>American Horror Story</li>
-          <li>The Handmaids Tale</li>
-          <li>Game of Thrones</li>
-          <li>How I Met Your Mother</li>
-          <li>Brooklyn Nine-Nine</li>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🖥️</div>
+        <span class="skill-card-name">Frontend</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Vue.js</span>
+        <span class="skill-tag">ReactJS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Flutter</span>
+        <span class="skill-tag">Dart</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🗄️</div>
+        <span class="skill-card-name">Banco de Dados</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Redis</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🚀</div>
+        <span class="skill-card-name">Infraestrutura</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">Grafana</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🧪</div>
+        <span class="skill-card-name">Testes & Qualidade</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">RSpec</span>
+        <span class="skill-tag">Capybara</span>
+        <span class="skill-tag">TDD</span>
+        <span class="skill-tag">BDD</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">⚙️</div>
+        <span class="skill-card-name">Metodologias</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Scrum</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Microsserviços</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!--
+<section id="projects" class="reveal">
+  <p class="section-tag">Portfólio</p>
+  <h2 class="section-title">Projetos em destaque</h2>
+  <p class="section-desc">Algumas das coisas que construí — pessoais, freelance e open source.</p>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      ...
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+-->
+
+<section id="experience" class="reveal">
+  <p class="section-tag">Trajetória</p>
+  <h2 class="section-title">Experiência</h2>
+  <p class="section-desc">Onde trabalhei e o que construí ao longo do caminho.</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        set 2025 – hoje
+        <span class="current">atual</span>
+      </div>
+      <div>
+        <h3 class="timeline-role">Engenheira de Software</h3>
+        <p class="timeline-company">Locaweb · Remoto</p>
+        <ul class="timeline-desc">
+          <li>Migração de arquitetura de monólito para microsserviços, visando maior escalabilidade e desacoplamento dos sistemas.</li>
+          <li>Implementação e análise de dashboards no Grafana para observabilidade e alta disponibilidade.</li>
+          <li>Desenvolvimento com Ruby on Rails, Vue.js e Redis, com gestão de infraestrutura em Azure, Docker e Kubernetes.</li>
         </ul>
+        <div class="timeline-tags">
+          <span class="skill-tag">Rails</span>
+          <span class="skill-tag">Vue.js</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">Grafana</span>
+        </div>
       </div>
+    </div>
 
-      <div class="card">
-        <h2>Follow me</h2>
-      
-        <ul class="list-inline">
-          <li><a href="https://github.com/waitoair" target="_blank"><i class="fab fa-github"></i></a></li>
-          <li><a href="https://www.linkedin.com/in/saraivaluana/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-          <li><a href="https://www.instagram.com/waitoair/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    <div class="timeline-item">
+      <div class="timeline-date">dez 2022 – out 2025</div>
+      <div>
+        <h3 class="timeline-role">Engenheira de Software</h3>
+        <p class="timeline-company">87Labs · Remoto</p>
+        <ul class="timeline-desc">
+          <li>Desenvolvimento de aplicações web com Ruby on Rails, PostgreSQL e SQL, focando em performance e escalabilidade.</li>
+          <li>Reduzi em 60% o tempo de execução de CI através da otimização estratégica do pipeline de testes.</li>
+          <li>Implementação de processamento assíncrono com Sidekiq e manutenção de qualidade com RSpec e Capybara.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="skill-tag">Rails</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Sidekiq</span>
+          <span class="skill-tag">RSpec</span>
+          <span class="skill-tag">Capybara</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">fev 2022 – fev 2023</div>
+      <div>
+        <h3 class="timeline-role">Desenvolvedora Fullstack</h3>
+        <p class="timeline-company">ENUBE.me · Remoto</p>
+        <ul class="timeline-desc">
+          <li>Liderança integral de projeto bancário com frentes Web (JavaScript) e Mobile (Flutter).</li>
+          <li>Atuação desde a codificação até a validação semanal de requisitos diretamente com o cliente.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">jul 2021 – fev 2022</div>
+      <div>
+        <h3 class="timeline-role">Desenvolvedora Fullstack</h3>
+        <p class="timeline-company">Hortatech · Remoto</p>
+        <ul class="timeline-desc">
+          <li>Sustentação e evolução de aplicações Ruby on Rails e ReactJS.</li>
+          <li>Foco em refatoração de código legado e integração de APIs externas.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="skill-tag">Rails</span>
+          <span class="skill-tag">ReactJS</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education" class="reveal">
+  <p class="section-tag">Formação</p>
+  <h2 class="section-title">Educação</h2>
+
+  <div class="timeline">
+
+    <div class="edu-item">
+      <div class="edu-period">2024 – jul 2026<br /><em style="font-style:normal; font-size:0.62rem; color: var(--ruby-light);">em andamento</em></div>
+      <div>
+        <h3 class="edu-degree">MBA em Engenharia de Software</h3>
+        <p class="edu-school">USP / Esalq</p>
+        <ul class="edu-focus">
+          <li>Arquitetura de Software e Padrões de Projeto</li>
+          <li>DevOps e Cloud Computing</li>
+          <li>Qualidade de Software</li>
         </ul>
       </div>
     </div>
-  </body>
+
+    <div class="edu-item">
+      <div class="edu-period">2021 – 2023</div>
+      <div>
+        <h3 class="edu-degree">Análise e Desenvolvimento de Sistemas</h3>
+        <p class="edu-school">UNINTER</p>
+        <ul class="edu-focus">
+          <li>Algoritmos e Estrutura de Dados</li>
+          <li>Banco de Dados Relacional</li>
+          <li>Engenharia de Requisitos e POO</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="reveal">
+  <div class="contact-inner">
+    <p class="section-tag" style="justify-content: center;">Contato</p>
+    <h2 class="section-title">Vamos conversar?</h2>
+    <p class="section-desc" style="margin: 0 auto;">
+      Disponível para projetos freelance e conversas sobre tecnologia.
+      Me manda uma mensagem!
+    </p>
+
+    <a href="mailto:saraivaluana20@gmail.com" class="contact-email">
+      saraivaluana20@gmail.com →
+    </a>
+
+    <ul class="social-links">
+      <li><a href="https://linkedin.com/in/saraivaluana" class="social-link" target="_blank" rel="noopener noreferrer">in LinkedIn</a></li>
+      <li><a href="https://github.com/waitoair" class="social-link" target="_blank" rel="noopener noreferrer">⌥ GitHub</a></li>
+      <li><a href="blog.html" class="social-link">✦ Blog</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">
+    Feito com <span class="hi">♥</span> + Ruby · © <span id="year"></span>
+  </span>
+  <span class="footer-copy">Luana Saraiva · Rio de Janeiro, RJ</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
